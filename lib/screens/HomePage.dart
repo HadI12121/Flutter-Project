@@ -4,6 +4,7 @@ import 'package:foodapp/components/MyFoodTile.dart';
 import 'package:foodapp/components/SilverAppBar.dart';
 import 'package:foodapp/models/Resturant.dart';
 import 'package:foodapp/models/food.dart';
+import 'package:foodapp/screens/FoodPage.dart';
 import 'package:provider/provider.dart';
 import '../components/MyCurrentLocation.dart';
 import '../components/myDescriptionBox.dart';
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage>
         padding: EdgeInsets.zero,
         itemBuilder:(context,index){
           final food = categoryMenu[index];
-          return MyFoodTile(food: food, onTap: (){});
+          return MyFoodTile(food: food, onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>FoodPage(food: food))));
         });
     }).toList();
   }
