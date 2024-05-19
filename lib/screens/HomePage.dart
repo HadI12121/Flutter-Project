@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/components/MyDrawer.dart';
 import 'package:foodapp/components/SilverAppBar.dart';
+import 'package:foodapp/models/Resturant.dart';
 import 'package:foodapp/models/food.dart';
+import 'package:provider/provider.dart';
 import '../components/MyCurrentLocation.dart';
 import '../components/myDescriptionBox.dart';
 import '../components/MyTabBar.dart';
@@ -28,6 +30,24 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  List <Food> _filterMenuByCategory (FoodCategory category , List<Food>fullMenu){
+    return fullMenu.where((food) => food.category==category).toList();
+  }
+
+  List <Widget> getFoodInThisCategory(List<Food> fullMenu){
+    return FoodCategory.values.map((category){
+      List<Food> categoryMenu = _filterMenuByCategory(category, fullMenu);
+      return ListView.builder(
+        itemCount: categoryMenu.length,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder:(context,index){
+          return ListTile(
+            title: Text(categoryMenu[index].name),
+          );
+        });
+    }).toList();
   }
 
   @override
@@ -59,14 +79,10 @@ class _HomePageState extends State<HomePage>
             ),
           )
         ],
-        body: TabBarView(
+        body: Consumer<Resturant>(builder:(context, resturant, child) =>TabBarView(
           controller: _tabController,
-          children: [
-            ListView.builder(itemCount: 5,itemBuilder: (context,index)=>Text('First Tab Item'),),
-            ListView.builder(itemCount: 5,itemBuilder: (context,index)=>Text('Second Tab Item'),),
-            ListView.builder(itemCount: 5,itemBuilder: (context,index)=>Text('Third Tab Item'),),
-            ListView.builder(itemCount: 5,itemBuilder: (context,index)=>Text('Forth Tab Item'),),
-          ])
+          children: 
+            getFoodInThisCategory(resturant.menu)        ) ,)
       ),
     );
   }
