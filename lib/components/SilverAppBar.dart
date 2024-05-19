@@ -16,11 +16,23 @@ class CustomSilverAppBar extends StatelessWidget {
       collapsedHeight: 120,
       pinned: true,
       actions: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart))
+        IconButton(onPressed: (){}, icon: const Icon(Icons.shopping_cart))
       ],
       backgroundColor:Theme.of(context).colorScheme.background,
+      foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+
+       title: const Text("Sunset Diner"),
+       flexibleSpace: FlexibleSpaceBar(
+      background: Padding(
+        padding: const EdgeInsets.only(bottom: 50),
+        child: child,
+      ),
        title: title,
-       flexibleSpace: FlexibleSpaceBar(background: child),
+       centerTitle: true,
+       titlePadding: const EdgeInsets.only(left: 0, right: 0, top: 0),
+       expandedTitleScale: 1,
+
+       ),
        );
   }
 }
