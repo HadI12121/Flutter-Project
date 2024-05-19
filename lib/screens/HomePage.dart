@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/components/MyDrawer.dart';
 import 'package:foodapp/components/SilverAppBar.dart';
+import '../components/MyCurrentLocation.dart';
+import '../components/myDescriptionBox.dart';
+import '../components/MyTabBar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,30 +12,56 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  // tab controller
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
         backgroundColor: Theme.of(context).colorScheme.background,
-        
       ),
       drawer: const MyDrawer(),
-       body: NestedScrollView(
+      body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          CustomSilverAppBar(child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Divider(
-                    indent: 25,
-                    endIndent: 25,
-                    color: Theme.of(context).colorScheme.secondary,
-
-                  )
-            ],
-          ) , title: Text('Title')),
-        ], body: Container(color: Colors.blue,),),
+          CustomSilverAppBar(
+            title: MyTabBar(tabController: _tabController),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Divider(
+                  indent: 25,
+                  endIndent: 25,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                // my current location
+                const MyCurrentLocation(),
+                // description box
+                const MyDescriptionBox(),
+              ],
+            ),
+          )
+        ],
+        body: Container(
+          color: Colors.blue,
+        ),
+      ),
     );
   }
 }
