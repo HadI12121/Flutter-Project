@@ -16,18 +16,21 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Home Page'),
         backgroundColor: Theme.of(context).colorScheme.background,
-        
       ),
       drawer: const MyDrawer(),
-       body: NestedScrollView(
+      body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          CustomSilverAppBar(child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text('LooL')
-            ],
-          ) , title: Text('Title')),
-        ], body: Container(color: Colors.blue,),),
+          CustomSilverAppBar(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [Text('LooL')],
+              ),
+              title: Text('Title')),
+        ],
+        body: Container(
+          color: Colors.blue,
+        ),
+      ),
     );
   }
 }
