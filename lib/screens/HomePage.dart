@@ -21,7 +21,12 @@ class _HomePageState extends State<HomePage> {
       drawer: const MyDrawer(),
        body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          CustomSilverAppBar(child: Text('Hello'), title: Text('Title')),
+          CustomSilverAppBar(child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text('LooL')
+            ],
+          ) , title: Text('Title')),
         ], body: Container(color: Colors.blue,),),
     );
   }
