@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/components/MyDrawer.dart';
 import 'package:foodapp/components/SilverAppBar.dart';
+import '../components/MyCurrentLocation.dart';
+import '../components/myDescriptionBox.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,7 +25,17 @@ class _HomePageState extends State<HomePage> {
           CustomSilverAppBar(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [Text('LooL')],
+                children: [
+                  Divider(
+                    indent: 25,
+                    endIndent: 25,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  // my current location
+                  const MyCurrentLocation(),
+                  // description box
+                  const MyDescriptionBox(),
+                ],
               ),
               title: Text('Title')),
         ],
