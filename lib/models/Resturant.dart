@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'food.dart';
 
-class Resturant {
+class Resturant extends ChangeNotifier {
   final List<Food> _menu = [
     Food(
         name: "Classic Cheeseburger",
@@ -74,8 +76,7 @@ class Resturant {
           Addon(name: "Shredded Cheese", price: 0.7),
           Addon(name: "Croutons", price: 0.9),
         ]),
-
-          Food(
+    Food(
         name: "Kale and Apple Salad",
         description:
             "Tender kale leaves, thinly sliced apples, dried cranberries, walnuts, and crumbled blue cheese, tossed in a honey mustard dressing.",
@@ -87,8 +88,7 @@ class Resturant {
           Addon(name: "Shredded Cheese", price: 0.7),
           Addon(name: "Croutons", price: 0.9),
         ]),
-
-          Food(
+    Food(
         name: "Kale and Apple Salad",
         description:
             "Tender kale leaves, thinly sliced apples, dried cranberries, walnuts, and crumbled blue cheese, tossed in a honey mustard dressing.",
@@ -100,8 +100,7 @@ class Resturant {
           Addon(name: "Shredded Cheese", price: 0.7),
           Addon(name: "Croutons", price: 0.9),
         ]),
-
-          Food(
+    Food(
         name: "Kale and Apple Salad",
         description:
             "Tender kale leaves, thinly sliced apples, dried cranberries, walnuts, and crumbled blue cheese, tossed in a honey mustard dressing.",
@@ -113,8 +112,7 @@ class Resturant {
           Addon(name: "Shredded Cheese", price: 0.7),
           Addon(name: "Croutons", price: 0.9),
         ]),
-
-          Food(
+    Food(
         name: "Kale and Apple Salad",
         description:
             "Tender kale leaves, thinly sliced apples, dried cranberries, walnuts, and crumbled blue cheese, tossed in a honey mustard dressing.",
@@ -126,8 +124,7 @@ class Resturant {
           Addon(name: "Shredded Cheese", price: 0.7),
           Addon(name: "Croutons", price: 0.9),
         ]),
-
-          Food(
+    Food(
         name: "Kale and Apple Salad",
         description:
             "Tender kale leaves, thinly sliced apples, dried cranberries, walnuts, and crumbled blue cheese, tossed in a honey mustard dressing.",
@@ -139,8 +136,7 @@ class Resturant {
           Addon(name: "Shredded Cheese", price: 0.7),
           Addon(name: "Croutons", price: 0.9),
         ]),
-
-          Food(
+    Food(
         name: "Kale and Apple Salad",
         description:
             "Tender kale leaves, thinly sliced apples, dried cranberries, walnuts, and crumbled blue cheese, tossed in a honey mustard dressing.",
@@ -152,8 +148,7 @@ class Resturant {
           Addon(name: "Shredded Cheese", price: 0.7),
           Addon(name: "Croutons", price: 0.9),
         ]),
-
-          Food(
+    Food(
         name: "Kale and Apple Salad",
         description:
             "Tender kale leaves, thinly sliced apples, dried cranberries, walnuts, and crumbled blue cheese, tossed in a honey mustard dressing.",
@@ -165,8 +160,7 @@ class Resturant {
           Addon(name: "Shredded Cheese", price: 0.7),
           Addon(name: "Croutons", price: 0.9),
         ]),
-
-          Food(
+    Food(
         name: "Kale and Apple Salad",
         description:
             "Tender kale leaves, thinly sliced apples, dried cranberries, walnuts, and crumbled blue cheese, tossed in a honey mustard dressing.",
@@ -179,4 +173,10 @@ class Resturant {
           Addon(name: "Croutons", price: 0.9),
         ]),
   ];
+
+  List<Food> get menu => _menu;
+
+
+
+
 }

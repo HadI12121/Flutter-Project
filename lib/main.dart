@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/models/Resturant.dart';
 import 'package:provider/provider.dart';
 import 'theme/ThemeProvider.dart';  // Make sure the path is correct
 import 'auth/LoginOrRegister.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: MyApp(),
-    ),
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ChangeNotifierProvider(create: (context) => Resturant()),
+    ],child: const MyApp(),
+    )
   );
 }
 
