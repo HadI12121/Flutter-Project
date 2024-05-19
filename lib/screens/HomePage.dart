@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/components/MyDrawer.dart';
+import 'package:foodapp/components/MyFoodTile.dart';
 import 'package:foodapp/components/SilverAppBar.dart';
 import 'package:foodapp/models/Resturant.dart';
 import 'package:foodapp/models/food.dart';
@@ -42,10 +43,10 @@ class _HomePageState extends State<HomePage>
       return ListView.builder(
         itemCount: categoryMenu.length,
         physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
         itemBuilder:(context,index){
-          return ListTile(
-            title: Text(categoryMenu[index].name),
-          );
+          final food = categoryMenu[index];
+          return MyFoodTile(food: food, onTap: (){});
         });
     }).toList();
   }
