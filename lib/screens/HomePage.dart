@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/components/MyDrawer.dart';
 import 'package:foodapp/components/SilverAppBar.dart';
+import 'package:foodapp/models/food.dart';
 import '../components/MyCurrentLocation.dart';
 import '../components/myDescriptionBox.dart';
 import '../components/MyTabBar.dart';
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: FoodCategory.values.length, vsync: this);
   }
 
   @override
@@ -58,9 +59,14 @@ class _HomePageState extends State<HomePage>
             ),
           )
         ],
-        body: Container(
-          color: Colors.blue,
-        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            ListView.builder(itemCount: 5,itemBuilder: (context,index)=>Text('First Tab Item'),),
+            ListView.builder(itemCount: 5,itemBuilder: (context,index)=>Text('Second Tab Item'),),
+            ListView.builder(itemCount: 5,itemBuilder: (context,index)=>Text('Third Tab Item'),),
+            ListView.builder(itemCount: 5,itemBuilder: (context,index)=>Text('Forth Tab Item'),),
+          ])
       ),
     );
   }
