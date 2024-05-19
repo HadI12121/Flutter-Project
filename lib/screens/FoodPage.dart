@@ -8,7 +8,28 @@ class FoodPage extends StatefulWidget {
   @override
   State<FoodPage> createState() => _FoodPageState();
 }
+
 class _FoodPageState extends State<FoodPage> {
+  void _showThankYouDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Thank You!'),
+          content: Text('Thanks for placing your order.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +60,7 @@ class _FoodPageState extends State<FoodPage> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
- Text(
+            Text(
               'Available Add-ons:',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
@@ -55,16 +76,15 @@ class _FoodPageState extends State<FoodPage> {
                 },
               ),
             ),
-ElevatedButton(
+            ElevatedButton(
               onPressed: () {
-                // Handle add to cart action
-                // You can add functionality to add the selected food to the cart
+                _showThankYouDialog();
               },
-              child: Text('Add to Cart'),
+              child: Text('Order Now'),
             ),
           ],
         ),
-    ),
-);
-}
+      ),
+    );
+  }
 }
