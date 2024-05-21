@@ -1,23 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/components/FormButton.dart';
 import 'package:foodapp/components/MytextFields.dart';
+import 'package:foodapp/screens/LoginPage.dart';
+import '../auth/FirebaseServices.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
-  const RegisterPage({super.key,
-  required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final FirebaseServices _auth = FirebaseServices();
 
-final TextEditingController emailController = TextEditingController();
-final TextEditingController passwordController = TextEditingController();
-final TextEditingController confrimpasswordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confrimpasswordController = TextEditingController();
 
- 
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confrimpasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +64,8 @@ final TextEditingController confrimpasswordController = TextEditingController();
                 obscuretext: true,
               ),
               const SizedBox(height: 25.0),
-              FormButton(onTap: () {}, text: "Sign Up"),
-               Row(
+              FormButton(onTap: _signUp, text: "Sign Up"),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
@@ -81,6 +90,24 @@ final TextEditingController confrimpasswordController = TextEditingController();
         ),
       ),
     );
+  }
 
+  void _signUp() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("User is successfully created");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginPage(onTap: widget.onTap),
+        ),
+      );
+    } else {
+      print("Some Error Occurred");
+    }
   }
 }

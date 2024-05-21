@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/auth/FirebaseServices.dart';
 import '../components/MytextFields.dart';
 import '../components/FormButton.dart';
 import 'HomePage.dart';
@@ -16,17 +18,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final FirebaseServices _auth = FirebaseServices();
+  
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
 
-   void LoginButton(){
-    /*
-      backend authentication
-    */
-  Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()));
-
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    
+    super.dispose();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                 obscuretext: true,
               ),
               const SizedBox(height: 25.0),
-              FormButton(onTap:LoginButton, text: "Sign In"),
+              FormButton(onTap:_signIn, text: "Sign In"),
                Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -85,4 +92,25 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  void _signIn() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("User is successfully signin");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    } else {
+      print("Some Error Occurred");
+    }
+  }
+
+
 }
